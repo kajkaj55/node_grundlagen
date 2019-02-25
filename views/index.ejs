@@ -1,0 +1,43 @@
+<!--<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
+</html>-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+</head>
+<body>
+<ul id="message"></ul>
+<form action=""></form>
+  <input id="m" autocomplete="off" /><button>Send</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+  var socket = io(); // TIP: io() with no args does auto-discovery
+  socket.on('connect', function () { // TIP: you can avoid listening on `connect` and listen on events directly too!
+    socket.emit('ferret', 'tobi', 'woot', function (data) { // args are sent in order to acknowledgement function
+      console.log(data); // data will be 'tobi says woot'
+    });
+  });
+</script>
+<script>
+  $('form').submit(function () {
+    socket.emit('chat message',{'msg': $('#m').val(),'user':'Mohamed'});
+    $('#m').val('');
+    return false;
+  });
+</script>
+
+</body>
+</html>
+
